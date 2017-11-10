@@ -1,0 +1,77 @@
+Automation Hacks
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+String campo_string = ProductsPageObj.ObservacoesLista(driver).getText();
+
+if (campo_string == "Test") {
+			System.out.println("Pass");
+
+			}
+
+			else {
+				fail("Test Failed");
+			}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ExpectedConditions.textToBePresentInElementValue(ProductsPageObj.Somepage(driver), "Maecenas metus. Vivamus diam purus, cursus a, comm");
+
+Assert.assertEquals("", ProductsPageObj.NameLista(driver).getText());
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+		ProductsPageObj.SearchStatus(driver).click();
+		ProductsPageObj.SearchStatus(driver).sendKeys(Keys.ARROW_DOWN);
+		ProductsPageObj.SearchStatus(driver).sendKeys(Keys.ENTER);
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if (ProductsPageObj.SaveButton(driver).isEnabled() == false) {
+
+			ProductsPageObj.Name(driver).isDisplayed();
+			ProductsPageObj.Name(driver).sendKeys("Botão salvar está desabilitado" + i);
+
+			ProductsPageObj.Departments(driver).click();
+			ProductsPageObj.SelectItemDropdown(driver).click();
+			ProductsPageObj.Departments(driver).click();
+		}
+
+		if (ProductsPageObj.SaveButton(driver).isEnabled() == true) {
+			ProductsPageObj.SaveButton(driver).click();
+		}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+int i = (int) ((new Date().getTime() / 1000) - 2000);
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if (ProductsPageObj.SaveButton(driver).isDisplayed() == true
+				&& ProductsPageObj.SaveButton(driver).isEnabled() == false) {
+
+			ProductsPageObj.Name(driver).isDisplayed();
+			ProductsPageObj.Name(driver).sendKeys("Botão salvar está desabilitado" + i);
+
+			ProductsPageObj.Departments(driver).click();
+			ProductsPageObj.SelectItemDropdown(driver).click();
+			ProductsPageObj.Departments(driver).click();
+
+		} else {
+
+			fail("Failed");
+
+		}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+driver.manage().timeouts().setScriptTimeout(40, TimeUnit.SECONDS);
