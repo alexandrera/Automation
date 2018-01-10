@@ -1,7 +1,5 @@
 Automation Hacks
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 String campo_string = ProductsPageObj.ObservacoesLista(driver).getText();
 
 if (campo_string == "Test") {
@@ -17,7 +15,7 @@ if (campo_string == "Test") {
 
 ExpectedConditions.textToBePresentInElementValue(ProductsPageObj.Somepage(driver), "Maecenas metus. Vivamus diam purus, cursus a, comm");
 
-Assert.assertEquals("", ProductsPageObj.NameLista(driver).getText());
+Assert.assertEquals("", ProductsPageObj.NomeLista(driver).getText());
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -75,3 +73,48 @@ if (ProductsPageObj.SaveButton(driver).isDisplayed() == true
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 driver.manage().timeouts().setScriptTimeout(40, TimeUnit.SECONDS);
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+TestNG Run test multiple times
+@Test(invocationCount = 10)
+public void testCount() {..}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Page Obj Element map
+
+public static WebElement Email(WebDriver driver) {
+
+	try {
+	    Thread.sleep(500);
+	} catch (InterruptedException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+
+	WebElement element = (new WebDriverWait(driver, 30)).until(ExpectedConditions.visibilityOfElementLocated(By
+		.xpath("/html//div[@id=1]")));
+
+	return element;
+    }
+    
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+// mouse over
+Actions action = new Actions(driver);
+WebElement we = ContratosPageObj.ThisMainMenu(driver);
+action.moveToElement(we).build().perform();
+
+Actions action2 = new Actions(driver);
+WebElement we2 = DashboardPageObj.BotaoStart(driver);
+action2.moveToElement(we2).click().perform();
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+public static final String baseURL1 = "http://serverAddress";
+public static final String pathProperty = "C:/chromedriver.exe";
+public static final String user = "user1";
+public static final String password = "1234";
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
