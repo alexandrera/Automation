@@ -118,3 +118,64 @@ public static final String user = "user1";
 public static final String password = "1234";
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+	String sArray[] = new String[] { "14955796000140", "75682023000122" };
+
+	// convert array to list
+	List<String> lList = Arrays.asList(sArray);
+
+	while (ClientesPageObj.MensagemErroNomeExistente(driver).isDisplayed() != true) {
+
+	    number++;
+
+	    ClientesPageObj.Numero(driver).click();
+	    ClientesPageObj.Numero(driver).sendKeys(lList.get(number));
+	    ClientesPageObj.Salvar(driver).click();
+
+	}
+
+	ClientesPageObj.Voltar(driver).isDisplayed();
+	
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Your check needs to happen before you get to the .isDisplayed() method. The way WebDriverWait().until(ExpectedConditions.visibilityOfElementLocated()) works, it will return 
+either the element or throw an exception.
+
+I would suggest something like this in your element find code:
+
+public static WebElement Field(WebDriver driver) {
+
+  try {
+    Thread.sleep(500);
+    WebElement element = (new WebDriverWait(driver, 9)).until(ExpectedConditions.visibilityOfElementLocated(By
+    .xpath("element")));
+
+    return element;
+  } catch (Exception e) {
+    return null;
+  }
+
+Then, in your search code:
+
+if (PageObject.Field(driver) != null) {
+  // logic for handling the field goes here
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Scroll Down and Up
+
+JavascriptExecutor jse = (JavascriptExecutor) driver;
+	jse.executeScript("window.scrollBy(0,250)", "");
+	
+jse.executeScript("window.scrollBy(0,-250)", "");
+OR,
+jse.executeScript("scroll(0, -250);");
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Scrolling to Bottom of a page:
+
+JavascriptExecutor js = ((JavascriptExecutor) driver);
+js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
