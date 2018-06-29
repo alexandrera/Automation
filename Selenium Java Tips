@@ -179,3 +179,28 @@ Scrolling to Bottom of a page:
 
 JavascriptExecutor js = ((JavascriptExecutor) driver);
 js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Set browser property:
+
+//Firefox
+
+System.setProperty("webdriver.gecko.driver", "C:/Users/vntalar/Downloads/geckodriver.exe");
+		
+driver = new FirefoxDriver();
+		
+DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+capabilities.setCapability("marionette", true);
+driver.manage().window().maximize();
+driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+
+//Chrome
+
+System.setProperty("webdriver.chrome.driver", "C:/Users/vntalar/Downloads/chromedriver.exe");
+		
+driver = new ChromeDriver();
+		
+DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+driver.manage().window().maximize();
+driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
