@@ -204,3 +204,11 @@ driver = new ChromeDriver();
 DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 driver.manage().window().maximize();
 driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Different elements values, starts-with and contains
+	
+driver.findElement(By.xpath("//div[@aria-label='Corpo da mensagem']")).sendKeys(emailBody);
+driver.findElement(By.xpath("//div[starts-with(@aria-label,'Enviar')]")).click();
+driver.findElement(By.xpath("//div[contains(@aria-label,'Enviar')]")).click();
