@@ -212,3 +212,63 @@ Different elements values, starts-with and contains
 driver.findElement(By.xpath("//div[@aria-label='Corpo da mensagem']")).sendKeys(emailBody);
 driver.findElement(By.xpath("//div[starts-with(@aria-label,'Enviar')]")).click();
 driver.findElement(By.xpath("//div[contains(@aria-label,'Enviar')]")).click();
+
+	----------------
+		
+ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
+driver.switchTo().window(tabs2.get(1));
+
+---
+
+@Test
+public void testTabs() {
+    driver.get("https://business.twitter.com/start-advertising");
+    assertStartAdvertising();
+
+    // considering that there is only one tab opened in that point.
+    String oldTab = driver.getWindowHandle();
+    driver.findElement(By.linkText("Twitter Advertising Blog")).click();
+    ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
+    newTab.remove(oldTab);
+    // change focus to new tab
+    driver.switchTo().window(newTab.get(0));
+    assertAdvertisingBlog();
+
+    // Do what you want here, you are in the new tab
+
+    driver.close();
+    // change focus back to old tab
+    driver.switchTo().window(oldTab);
+    assertStartAdvertising();
+
+    // Do what you want here, you are in the old tab
+}
+
+private void assertStartAdvertising() {
+    assertEquals("Start Advertising | Twitter for Business", driver.getTitle());
+}
+
+private void assertAdvertisingBlog() {
+    assertEquals("Twitter Advertising", driver.getTitle());
+}
+
+----
+
+driver.close() and driver.quit() are two different methods for closing the browser session in Selenium WebDriver. Understanding both of them and knowing when to use which method is important in your test execution.
+
+    driver.close() – It closes the the browser window on which the focus is set.
+
+    driver.quit() – It basically calls driver.dispose method which in turn closes all the browser windows and ends the WebDriver session gracefully.
+
+You should use driver.quit() whenever you want to end the program. It will close all opened browser window and terminates the WebDriver session. If you do not use driver.quit at the end of program, WebDriver session will not close properly and files would not be cleared off memory. This may result in memory leak errors.
+
+In your case you have to use driver.close() which will close current window and keeps driver active.
+
+Just to add - if there is only browser window open and you use driver.close(), it will quit the webdriver session. The webdriver will not stay active.
+
+----
+
+	@FindBy(how = How.XPATH, using = ".container tbody tr td:nth-of-type(3)")
+	public static WebElement TotalAmount;
+
+----
