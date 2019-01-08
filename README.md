@@ -1,4 +1,4 @@
 # Automation
-Project to automate webpages.
+Code Fragments
 
-This project have solutions to automate end-to-end tests in order to save time when you want to run a Regression test and Populate the database with User Inputs.
+Things I learned to use when it comes to automation tests in Java
