@@ -1,0 +1,32 @@
+package test;
+
+import com.github.tomakehurst.wiremock.client.WireMock;
+import com.github.tomakehurst.wiremock.junit.WireMockRule;
+
+import io.restassured.RestAssured;
+
+import org.junit.Before;
+import org.junit.Rule;
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
+
+public class Mystub {
+
+	@Rule
+	public WireMockRule wireMockRule = new WireMockRule(8888);
+
+	@Before
+	public void stubService() {
+		WireMock.configureFor("localhost", wireMockRule.port());
+		WireMock.reset();
+		stubFor(get(urlEqualTo("/an/endpoint")).willReturn(aResponse().withHeader("Content-Type", "text/plain")
+				.withStatus(200).withBody("You've reached a valid WireMock endpoint")));
+	}
+
+	@org.junit.Test
+	public void test() throws Exception {
+
+		RestAssured.given().when().get("http://localhost:8888/an/endpoint").then().assertThat().statusCode(400);
+
+	}
+
+}
